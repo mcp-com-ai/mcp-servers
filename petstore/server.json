@@ -1,277 +1,44 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "ai.com.mcp/hapi-mcp",
-  "title": "HAPI MCP Server",
-  "description": "HAPI MCP server: Dynamically exposes OpenAPI REST APIs as MCP tools for AI assistants",
-  "websiteUrl": "https://docs.mcp.com.ai/components/hapi-server/hapi-cli",
+  "name": "ai.com.mcp/petstore",
+  "title": "Petstore MCP Server",
+  "description": "Swagger Petstore API (v1.0.27) as MCP for testing and prototyping powered by the HAPI MCP server",
+  "websiteUrl": "https://run.mcp.com.ai",
   "repository": {
     "url": "https://github.com/la-rebelion/hapimcp",
     "source": "github"
   },
   "version": "0.6.0",
-  "packages": [
-    {
-      "registryType": "oci",
-      "identifier": "docker.io/hapimcp/hapi-cli:0.6.0",
-      "runtimeHint": "docker",
-      "transport": {
-        "type": "streamable-http",
-        "url": "https://{HAPI_FQDN}:{HAPI_PORT}/mcp",
-        "headers": [
-          {
-            "name": "Authorization",
-            "valueHint": "token",
-            "description": "Authorization token for accessing the MCP server",
-            "isRequired": false,
-            "format": "string",
-            "isSecret": true
-          }
-        ]
-      },
-      "runtimeArguments": [
-        {
-          "name": "-p",
-          "valueHint": "port",
-          "description": "Port mapping for the host to container (e.g., '3030:3030'). Adjust second port if changing internal container port (HAPI_PORT)",
-          "isRequired": true,
-          "format": "string",
-          "default": "3030:3030",
-          "type": "named"
-        },
-        {
-          "name": "-v",
-          "valueHint": "volume",
-          "description": "Volume mapping for HAPI configuration directory",
-          "isRequired": false,
-          "format": "string",
-          "default": "~/.hapi:/app/.hapi",
-          "isRepeated": true,
-          "type": "named"
-        }
-      ],
-      "packageArguments": [
-        {
-          "name": "serve",
-          "description": "Command to start the HAPI MCP server",
-          "isRequired": true,
-          "format": "string",
-          "default": "serve",
-          "valueHint": "serve",
-          "type": "positional"
-        },
-        {
-          "name": "projectName",
-          "valueHint": "petstore",
-          "description": "The name of the project/API to serve (e.g., 'petstore'). Optional when using HAPI_OPENAPI environment variable",
-          "isRequired": false,
-          "format": "string",
-          "type": "positional"
-        },
-        {
-          "name": "--port",
-          "valueHint": "port",
-          "description": "The port to listen on inside the container",
-          "isRequired": false,
-          "format": "number",
-          "default": "3030",
-          "type": "named"
-        },
-        {
-          "name": "--headless",
-          "description": "Run in headless mode (serve MCP-only, no business logic)",
-          "isRequired": false,
-          "format": "boolean",
-          "default": "true",
-          "type": "named"
-        },
-        {
-          "name": "--mcp",
-          "description": "The server provides REST API's business logic AND also exposes them as MCP tools",
-          "isRequired": false,
-          "format": "boolean",
-          "default": "true",
-          "type": "named"
-        },
-        {
-          "name": "--dev",
-          "description": "Enable development mode with verbose logging",
-          "isRequired": false,
-          "format": "boolean",
-          "type": "named"
-        },
-        {
-          "name": "--url",
-          "valueHint": "url",
-          "description": "The full URL for the backend API server (overrides OpenAPI spec servers). Uses OAS server URL if not provided",
-          "isRequired": false,
-          "format": "string",
-          "type": "named"
-        },
-        {
-          "name": "--openapi",
-          "valueHint": "openapi",
-          "description": "OpenAPI spec file path or URL to use instead of loading from HAPI_HOME",
-          "isRequired": false,
-          "format": "string",
-          "type": "named"
-        },
-        {
-          "name": "--cors",
-          "valueHint": "origins",
-          "description": "Comma-separated list of allowed origins for CORS (e.g., 'http://localhost:3000,https://example.com')",
-          "isRequired": false,
-          "format": "string",
-          "type": "named"
-        },
-        {
-          "name": "--filename",
-          "valueHint": "files",
-          "description": "Comma-separated list of OAS configuration files to apply (can be URLs)",
-          "isRequired": false,
-          "format": "string",
-          "type": "named"
-        },
-        {
-          "name": "--cert",
-          "valueHint": "path",
-          "description": "Path to SSL certificate file for HTTPS. Volume mount required if using Docker. https://docs.mcp.com.ai/components/hapi-server/hapi-cli#running-with-tls-https",
-          "isRequired": false,
-          "format": "string",
-          "type": "named"
-        },
-        {
-          "name": "--key",
-          "valueHint": "path",
-          "description": "Path to SSL key file for HTTPS. Volume mount required if using Docker",
-          "isRequired": false,
-          "format": "string",
-          "type": "named"
-        }
-      ],
-      "environmentVariables": [
-        {
-          "name": "HAPI_FQDN",
-          "description": "Fully Qualified Domain Name for the HAPI server (used in MCP tool URLs)",
-          "isRequired": false,
-          "format": "string",
-          "default": "localhost"
-        },
-        {
-          "name": "HAPI_HOME",
-          "description": "Directory path for HAPI configuration and specs. Should be mounted as a volume in Docker",
-          "isRequired": false,
-          "format": "string",
-          "default": "/app/.hapi"
-        },
-        {
-          "name": "PROJECT_NAME",
-          "description": "The name of the project/API (alternative to positional argument)",
-          "isRequired": false,
-          "format": "string"
-        },
-        {
-          "name": "HAPI_OPENAPI",
-          "description": "OpenAPI spec URL or path (alternative to --openapi flag)",
-          "isRequired": false,
-          "format": "string"
-        },
-        {
-          "name": "HAPI_URL",
-          "description": "Backend API base URL (alternative to --url flag)",
-          "isRequired": false,
-          "format": "string"
-        },
-        {
-          "name": "HAPI_PORT",
-          "description": "Server port (alternative to --port flag) - this is the internal container port",
-          "isRequired": false,
-          "format": "number",
-          "default": "3030"
-        },
-        {
-          "name": "HAPI_HEADLESS",
-          "description": "Enable headless mode (alternative to --headless flag)",
-          "isRequired": false,
-          "format": "boolean",
-          "default": "true"
-        },
-        {
-          "name": "HAPI_MCP",
-          "description": "Enable MCP mode (alternative to --mcp flag)",
-          "isRequired": false,
-          "format": "boolean",
-          "default": "true"
-        },
-        {
-          "name": "HAPI_DEV",
-          "description": "Enable development mode (alternative to --dev flag)",
-          "isRequired": false,
-          "format": "boolean"
-        },
-        {
-          "name": "HAPI_CORS",
-          "description": "Comma-separated allowed CORS origins (alternative to --cors flag)",
-          "isRequired": false,
-          "format": "string"
-        },
-        {
-          "name": "HAPI_CONFIG_FILES",
-          "description": "Comma-separated configuration files (alternative to --filename flag)",
-          "isRequired": false,
-          "format": "string"
-        },
-        {
-          "name": "NODE_ENV",
-          "description": "Node environment (development, production). 'development' enables verbose logging and debugging features.",
-          "isRequired": false,
-          "format": "string",
-          "default": "production"
-        }
-      ]
-    }
-  ],
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://{HAPI_FQDN}:{HAPI_PORT}/mcp",
-      "variables": {
-        "HAPI_FQDN": {
-          "description": "Fully Qualified Domain Name for the HAPI server",
-          "isRequired": false,
-          "format": "string",
-          "default": "localhost"
-        },
-        "HAPI_PORT": {
-          "description": "Port for the HAPI server",
-          "isRequired": false,
-          "format": "number",
-          "default": "3030"
-        }
-      }
+      "url": "https://petstore.run.mcp.com.ai/mcp"
     }
   ],
   "_meta": {
     "io.modelcontextprotocol.registry/publisher-provided": {
       "publisher": "La Rebelion Labs",
       "license": "MIT",
-      "keywords": ["openapi", "rest-api", "api-first", "headless", "docker"],
-      "documentation": "https://docs.mcp.com.ai/deployment/docker",
+      "keywords": ["openapi", "rest-api", "petstore", "example", "demo", "swagger"],
+      "documentation": "https://docs.mcp.com.ai",
       "examples": [
         {
-          "name": "Quick Start with a local API spec",
-          "description": "Save specs in ~/.hapi/specs. Download example if not present: https://petstore3.swagger.io/api/v3/swagger.json",
-          "command": "docker run -p 3030:3030 -v ~/.hapi:/app/.hapi hapimcp/hapi-cli:0.6.0 serve petstore --port 3030 --headless --url https://petstore3.swagger.io/api/v3"
+          "name": "Basic Connection",
+          "description": "Connect to the Petstore MCP server to access pet store operations",
+          "config": "Add 'https://petstore.run.mcp.com.ai/mcp' as a remote MCP server in your MCP client"
         },
         {
-          "name": "Custom OpenAPI with Environment Variables",
-          "description": "Serve a custom API using environment variables",
-          "command": "docker run -p 3030:3030 -e HAPI_OPENAPI=https://api.example.com/openapi.json -e HAPI_URL=https://api.example.com hapimcp/hapi-cli:0.6.0 serve my-api --headless"
-        },
-        {
-          "name": "Docker Compose Setup",
-          "description": "Run with persistent volumes and custom specs",
-          "config": "See https://docs.mcp.com.ai/deployment/docker#docker-compose-example"
+          "name": "Available Operations",
+          "description": "The server exposes all Petstore API operations as MCP tools including: findPetsByStatus, getPetById, addPet, updatePet, deletePet, and more",
+          "note": "See https://petstore3.swagger.io for the full API specification"
         }
+      ],
+      "notes": [
+        "This is a demo server hosted by La Rebelion Labs",
+        "The backend API is https://petstore3.swagger.io/api/v3",
+        "No authentication required for basic operations",
+        "Rate limits may apply",
+        "For production use, deploy your own HAPI MCP server"
       ]
     }
   }
