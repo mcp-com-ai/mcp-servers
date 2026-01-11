@@ -1,0 +1,49 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "ai.com.mcp/registry",
+  "title": "MCP Registry Server",
+  "description": "Publish and discover MCP servers via the official MCP Registry. Powered by HAPI MCP server.",
+  "websiteUrl": "https://run.mcp.com.ai",
+  "repository": {
+    "url": "https://github.com/modelcontextprotocol/registry",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://registry.run.mcp.com.ai/mcp"
+    }
+  ],
+  "_meta": {
+    "io.modelcontextprotocol.registry/publisher-provided": {
+      "publisher": "La Rebelion Labs",
+      "license": "MIT",
+      "keywords": ["openapi", "rest-api", "mcp", "registry", "discovery", "publishing", "modelcontextprotocol"],
+      "documentation": "https://github.com/modelcontextprotocol/registry/tree/main/docs",
+      "examples": [
+        {
+          "name": "Basic Connection",
+          "description": "Connect to the official MCP Registry server to discover and publish MCP servers.",
+          "config": "Add 'https://registry.run.mcp.com.ai/mcp' as a remote MCP server in your MCP client."
+        },
+        {
+          "name": "Available Operations",
+          "description": "The server exposes all MCP Registry API operations as MCP tools, including: server publishing, search, update, and more.",
+          "note": "See https://github.com/modelcontextprotocol/registry/tree/main/docs/reference/api/openapi.yaml for the full API specification."
+        }
+      ],
+      "notes": [
+        "This is the MCP Registry server pointing to the official MCP Registry backend.",
+        "The backend API is https://registry.modelcontextprotocol.io.",
+        "Public discovery endpoints are available without authentication.",
+        "Rate limits may apply.",
+        "For self-hosting, run your own HAPI MCP server using:",
+        "Docker: docker run -p 3030:3030  -v ~/.hapi:/app/.hapi serve registry --port 3030 --headless --url https://registry.modelcontextprotocol.io",
+        "The HAPI MCP CLI: hapi serve registry --port 3030 --headless --url https://registry.modelcontextprotocol.io --openapi https://github.com/modelcontextprotocol/registry/raw/refs/heads/main/docs/reference/api/openapi.yaml",
+        "Deploy to Cloudflare: hapi deploy --name mcp-registry --openapi https://github.com/modelcontextprotocol/registry/raw/refs/heads/main/docs/reference/api/openapi.yaml --url https://registry.modelcontextprotocol.io",
+        "Documentation: https://docs.mcp.com.ai/deployment/"
+      ]
+    }
+  }
+}

@@ -38,7 +38,10 @@
         "The backend API is https://petstore3.swagger.io/api/v3",
         "No authentication required for basic operations",
         "Rate limits may apply",
-        "For production use, deploy your own HAPI MCP server"
+        "For production use, deploy your own HAPI MCP server",
+        "Run your own HAPI MCP server using Docker: docker run -p 3030:3030 --openapi https://petstore3.swagger.io/api/v3/openapi.json serve petstore --port 3030 --headless --url https://petstore3.swagger.io/api/v3",
+        "Or the HAPI MCP CLI: hapi serve petstore --port 3030 --headless --url https://petstore3.swagger.io/api/v3 --openapi https://petstore3.swagger.io/api/v3/openapi.json",
+        "Documentation: https://docs.mcp.com.ai/deployment/"
       ]
     }
   }
