@@ -1,0 +1,68 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "ai.com.mcp/openai-tools",
+  "title": "OpenAI Tools MCP Server",
+  "description": "Focused MCP server for OpenAI image/audio generation (v2.0.0). Wraps endpoints via HAPI CLI.",
+  "websiteUrl": "https://platform.openai.com/docs/api-reference",
+  "repository": {
+    "url": "https://github.com/la-rebelion/hapimcp",
+    "source": "github"
+  },
+  "version": "0.6.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://openai-tools.run.mcp.com.ai/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "valueHint": "ACCESS_TOKEN",
+          "description": "Bearer token for authenticating with the OpenAI API. Obtain via the OpenAI dashboard. https://platform.openai.com/api-keys",
+          "isRequired": true,
+          "format": "string",
+          "isSecret": true
+        }
+      ]
+    }
+  ],
+  "runtimeVariables": [
+    {
+      "name": "ACCESS_TOKEN",
+      "description": "Access Token for OpenAI API authentication - use your token here",
+      "format": "string",
+      "isSecret": true
+    }
+  ],
+  "_meta": {
+    "io.modelcontextprotocol.registry/publisher-provided": {
+      "publisher": "La Rebelion Labs",
+      "license": "MIT",
+      "keywords": ["openai", "ai", "images", "audio", "dalle", "whisper", "generation", "mcp", "hapi"],
+      "documentation": "https://docs.mcp.com.ai/examples/mcp-servers-from-oas/openai-mcp",
+      "examples": [
+        {
+          "name": "Docker Run",
+          "description": "Run the OpenAI Tools MCP server using Docker",
+          "command": "docker run -p 3030:3030 hapimcp/hapi-cli:0.6.0 serve openai-tools --port 3030 --headless --url https://api.openai.com/v1 --openapi https://docs.mcp.com.ai/servers-apis/openapi/openai-tools.yaml"
+        },
+        {
+          "name": "HAPI CLI",
+          "description": "Run using local HAPI CLI integration",
+          "command": "hapi serve openai-tools --headless --port 3030 --url https://api.openai.com/v1"
+        },
+        {
+          "name": "MCP Inspector",
+          "description": "Inspect the available tools",
+          "command": "hapi serve openai-tools --headless --port 3030 --url https://api.openai.com/v1 | bunx @modelcontextprotocol/inspector"
+        }
+      ],
+      "notes": [
+        "This focused server prevents token bloat by only exposing image and audio generation tools.",
+        "Requires an OpenAI API Key.",
+        "Uses the HAPI CLI to dynamically convert the OpenAI OpenAPI spec to MCP tools.",
+        "The OpenAPI spec is a skimmed version of the full OpenAI API.",
+        "For scaling info, see: https://mcp.com.ai/mcp-at-scale"
+      ]
+    }
+  }
+}

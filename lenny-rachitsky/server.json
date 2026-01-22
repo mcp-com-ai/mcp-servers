@@ -1,0 +1,48 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "ai.com.mcp/lenny-rachitsky-podcast",
+  "title": "Lenny Rachitsky Podcast Transcripts MCP Server",
+  "description": "MCP server for structured access to Lenny Rachitsky podcast transcripts. For content creators.",
+  "websiteUrl": "https://mcp.com.ai",
+  "repository": {
+    "url": "https://github.com/la-rebelion/hapimcp",
+    "source": "github"
+  },
+  "version": "0.6.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://lenny-rachitsky.run.mcp.com.ai/mcp"
+    }
+  ],
+  "_meta": {
+    "io.modelcontextprotocol.registry/publisher-provided": {
+      "publisher": "La Rebelion Labs",
+      "license": "MIT",
+      "keywords": ["openapi", "rest-api", "podcast", "transcripts", "lenny rachitsky", "influencer", "ai", "content", "search", "archive", "vlog", "content creators"],
+      "documentation": "https://docs.mcp.com.ai/servers-apis/openapi/podcast-transcripts.yaml",
+      "examples": [
+        {
+          "name": "Basic Connection",
+          "description": "Connect to the Lenny Rachitsky Podcast MCP server to access and search podcast transcripts.",
+          "config": "Add 'https://lenny-rachitsky.run.mcp.com.ai/mcp' as a remote MCP server in your MCP client."
+        },
+        {
+          "name": "Available Operations",
+          "description": "The server exposes podcast transcript search, retrieval, and metadata operations as MCP tools.",
+          "note": "See the OpenAPI spec for endpoints and schema: https://docs.mcp.com.ai/servers-apis/openapi/podcast-transcripts.yaml"
+        }
+      ],
+      "notes": [
+        "This MCP server is designed for influencers and content creators to make their content accessible to AI tools.",
+        "All that is needed are the transcripts in a structured format.",
+        "Lenny Rachitsky is a leading voice in product management and startups, hosting a popular podcast with industry experts.",
+        "The backend API is https://lenny-rachitsky.search.mcp.com.ai",
+        "No authentication required for public transcript access.",
+        "For production or private deployments, see the HAPI MCP server documentation.",
+        "OpenAPI spec: https://docs.mcp.com.ai/servers-apis/openapi/podcast-transcripts.yaml",
+        "Documentation: https://docs.mcp.com.ai"
+      ]
+    }
+  }
+}
