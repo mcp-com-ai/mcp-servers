@@ -1,0 +1,61 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "ai.com.mcp/skills-search",
+  "title": "Agent Skills Search Server",
+  "description": "Search and discover Agent Skills from the skills.sh registry. Powered by HAPI MCP server.",
+  "websiteUrl": "https://run.mcp.com.ai",
+  "repository": {
+    "url": "https://github.com/agentskills/agentskills",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://skills-sh.run.mcp.com.ai/mcp"
+    }
+  ],
+  "_meta": {
+    "io.modelcontextprotocol.registry/publisher-provided": {
+      "publisher": "La Rebelion Labs",
+      "license": "MIT",
+      "keywords": ["agent-skills", "search", "discovery", "skills-registry", "mcp", "openapi", "rest-api"],
+      "documentation": "https://agentskills.io/specification",
+      "examples": [
+        {
+          "name": "Basic Connection",
+          "description": "Connect to the Agent Skills Search server to discover skills from skills.sh registry.",
+          "config": "Add 'https://skills-sh.run.mcp.com.ai/mcp' as a remote MCP server in your MCP client."
+        },
+        {
+          "name": "Search for Skills",
+          "description": "Use the searchSkills tool to find Agent Skills by query string with fuzzy matching.",
+          "example": {
+            "tool": "searchSkills",
+            "parameters": {
+              "q": "mcp-com-ai",
+              "limit": 50
+            }
+          }
+        },
+        {
+          "name": "Available Operations",
+          "description": "The server exposes Agent Skills Search API operations as MCP tools for discovering and browsing skills.",
+          "note": "Returns skill metadata including install counts, sources, and unique identifiers."
+        }
+      ],
+      "notes": [
+        "This is the Agent Skills Search MCP server pointing to the skills.sh registry backend.",
+        "The backend API is https://skills.sh/api.",
+        "Public search endpoints are available without authentication.",
+        "Rate limits may apply.",
+        "For self-hosting, run your own HAPI MCP server using:",
+        "Docker: docker run -p 3030:3030 -v ~/.hapi:/app/.hapi ghcr.io/apicove/hapi-cli:latest serve skills-search --port 3030 --headless --url https://skills.sh",
+        "The HAPI MCP CLI: hapi serve skills-search --port 3030 --headless --url https://skills.sh --openapi https://docs.mcp.com.ai/servers-apis/openapi/skills-search.yaml",
+        "Deploy to Cloudflare: hapi deploy --name skills-search --openapi https://docs.mcp.com.ai/servers-apis/openapi/skills-search.yaml --url https://skills.sh",
+        "Documentation: https://docs.mcp.com.ai/deployment/",
+        "Skills Specification: https://agentskills.io/specification"
+      ]
+    }
+  }
+}
