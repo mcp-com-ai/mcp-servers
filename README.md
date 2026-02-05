@@ -29,6 +29,10 @@ Deploying & Registering MCP Servers
 
 ---
 
+## You have an MCP server, what now?
+
+Register it in the [official MCP registry](https://registry.modelcontextprotocol.io/) to make it discoverable by the community. Follow the steps below to deploy and register your MCP server.
+
 ## ❓ What is this repo?
 
 This repository is home to a growing collection of **production-ready MCP servers** that can be:
@@ -109,15 +113,10 @@ hapi deploy \
 
 ## 🌍 Register with MCP Registry
 
-### Automated (Coming soon)
+### Automated (Coming soon - vote for this feature!) ⭐
 
 ```bash
-hapi register server \
-  --url <BACKEND_URL> \
-  --name <SERVER_NAME> \
-  --description "<SERVER_DESCRIPTION>" \
-  --public \
-  --openapi <OPENAPI_URL>
+hapi register --name <SERVER_NAME|ID>
 ```
 
 ### Manual registration
