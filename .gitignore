@@ -3,14 +3,46 @@ build/
 bin/
 tmp/
 
+# Database files
 .db
+*.sqlite
+*.sqlite3
+
+# Environment and secrets
 .env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.cer
+*.crt
+id_rsa*
 .mcpregistry*
+
+# IDE and OS
 .DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Build artifacts
 validate-examples
 validate-schemas
-.idea/
 coverage.out
 coverage.html
 deploy/infra/infra
 ./registry
+
+# Cloud provider credentials
+.aws/
+.gcloud/
+.azure/
+
+# Temporary credential files
+*credentials*.json
+*token*.json
+*secret*.json

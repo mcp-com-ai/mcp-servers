@@ -29,7 +29,7 @@ Deploying & Registering MCP Servers
 
 ---
 
-## 🪝 What is this repo?
+## ❓ What is this repo?
 
 This repository is home to a growing collection of **production-ready MCP servers** that can be:
 
