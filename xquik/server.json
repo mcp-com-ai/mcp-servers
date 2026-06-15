@@ -1,0 +1,59 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.xquik/mcp",
+  "title": "Xquik MCP Server",
+  "description": "X data platform with 120 REST endpoints, 2 MCP tools, 23 extraction tools, webhooks, and writes.",
+  "websiteUrl": "https://docs.xquik.com/mcp/overview",
+  "repository": {
+    "url": "https://github.com/Xquik-dev/x-twitter-scraper",
+    "source": "github"
+  },
+  "version": "2.4.8",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://xquik.com/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {XQUIK_API_KEY}",
+          "description": "Xquik API key from https://dashboard.xquik.com/en/account",
+          "isRequired": true,
+          "isSecret": true,
+          "variables": {
+            "XQUIK_API_KEY": {
+              "description": "Your Xquik API key",
+              "isSecret": true
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "io.modelcontextprotocol.registry/publisher-provided": {
+      "publisher": "Xquik",
+      "keywords": [
+        "x",
+        "twitter",
+        "social-data",
+        "mcp",
+        "rest-api",
+        "webhooks"
+      ],
+      "documentation": "https://docs.xquik.com/mcp/overview",
+      "examples": [
+        {
+          "name": "Remote MCP",
+          "description": "Connect to Xquik as a remote Streamable HTTP MCP server.",
+          "config": "Add 'https://xquik.com/mcp' as a remote MCP server and provide Authorization: Bearer {XQUIK_API_KEY}."
+        }
+      ],
+      "notes": [
+        "Authentication uses an Xquik API key.",
+        "The well-known server card is available at https://xquik.com/.well-known/mcp.json.",
+        "The API documentation is available at https://docs.xquik.com/mcp/overview."
+      ]
+    }
+  }
+}
